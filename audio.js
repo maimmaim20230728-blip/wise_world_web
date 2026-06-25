@@ -18,7 +18,7 @@ window.WiseAudio = (function(){
 
   var ctx=null, master=null, comp=null, bgmGain=null, sfxGain=null;
   var muted=false, started=false, noiseBuf=null;
-  var bgmTimer=null, curTrack=null;
+  var bgmTimer=null, curTrack=null, bgmBus=null;
   var MUTE_KEY="wiseworld.muted.v1";
 
   var N={
@@ -113,7 +113,7 @@ window.WiseAudio = (function(){
     osc.connect(g);
     var tail=g;
     if(o.filterHz){ var f=ctx.createBiquadFilter(); f.type="lowpass"; f.frequency.value=o.filterHz; g.connect(f); tail=f; }
-    var dest=o.target||bgmGain;
+    var dest=o.target||bgmBus||bgmGain;
     if(o.pan && ctx.createStereoPanner){ var p=ctx.createStereoPanner(); p.pan.value=o.pan; tail.connect(p); p.connect(dest); }
     else tail.connect(dest);
     osc.start(t); osc.stop(t+dur+0.05);
@@ -129,13 +129,13 @@ window.WiseAudio = (function(){
     var o=ctx.createOscillator(), g=ctx.createGain();
     o.frequency.setValueAtTime(150,t); o.frequency.exponentialRampToValueAtTime(48,t+0.11);
     g.gain.setValueAtTime(Math.max(0.0002,gp),t); g.gain.exponentialRampToValueAtTime(0.0001,t+0.18);
-    o.connect(g); g.connect(bgmGain); o.start(t); o.stop(t+0.2);
+    o.connect(g); g.connect(bgmBus||bgmGain); o.start(t); o.stop(t+0.2);
   }
   function noiseHit(t,gp,hp,dur){
     var s=ctx.createBufferSource(); s.buffer=noiseBuf;
     var f=ctx.createBiquadFilter(); f.type="highpass"; f.frequency.value=hp;
     var g=ctx.createGain(); g.gain.setValueAtTime(Math.max(0.0002,gp),t); g.gain.exponentialRampToValueAtTime(0.0001,t+dur);
-    s.connect(f); f.connect(g); g.connect(bgmGain); s.start(t); s.stop(t+dur+0.02);
+    s.connect(f); f.connect(g); g.connect(bgmBus||bgmGain); s.start(t); s.stop(t+dur+0.02);
   }
   function hat(t,gp){ noiseHit(t,gp,7000,0.04); }
   function snare(t,gp){ noiseHit(t,gp,1800,0.13); play(180,t,0.12,{type:"triangle",peak:gp*0.5}); }
@@ -183,17 +183,22 @@ window.WiseAudio = (function(){
     if(curTrack===name && bgmTimer) return;
     stopBGM();
     curTrack=name;
-    bgmGain.gain.cancelScheduledValues(ctx.currentTime);
-    bgmGain.gain.setTargetAtTime(0.5, ctx.currentTime, 0.05);
+    // この再生セッション専用のバスを作る（切替時に旧曲の予約済み音符を確実に止めるため）
+    bgmBus=ctx.createGain(); bgmBus.gain.value=1; bgmBus.connect(bgmGain);
     scheduleLoop(name, ctx.currentTime+0.1);
   }
   function stopBGM(){
     if(bgmTimer){ clearTimeout(bgmTimer); bgmTimer=null; }
     curTrack=null;
-    if(bgmGain && ctx){
-      bgmGain.gain.cancelScheduledValues(ctx.currentTime);
-      bgmGain.gain.setValueAtTime(bgmGain.gain.value, ctx.currentTime);
-      bgmGain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime+0.15);
+    // 旧バスを短くフェードしてからグラフから切り離す＝予約済みの音符ごと停止し、重なりを防ぐ
+    var old=bgmBus; bgmBus=null;
+    if(old && ctx){
+      try{
+        old.gain.cancelScheduledValues(ctx.currentTime);
+        old.gain.setValueAtTime(old.gain.value, ctx.currentTime);
+        old.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime+0.12);
+      }catch(e){}
+      setTimeout(function(){ try{ old.disconnect(); }catch(e){} }, 220);
     }
   }
 
