@@ -157,6 +157,13 @@
   .levelup .newlv{font-size:42px; font-weight:800; color:var(--brand); margin:4px 0 14px;}
   .confetti{position:absolute; top:-12px; width:9px; height:14px; border-radius:2px; animation:fall linear infinite;}
   @keyframes fall{to{transform:translateY(360px) rotate(360deg); opacity:0;}}
+  .lu-msg{display:none; margin:2px 0 14px; font-size:14.5px; line-height:1.55; font-weight:700; color:var(--ink-soft);}
+  .levelup.finale{background:linear-gradient(165deg,#fff7e6,#ffe9f2);}
+  .levelup.finale .spark{font-size:66px; animation:spin 3s linear infinite;}
+  .levelup.finale h2{font-size:24px; font-weight:800; background:linear-gradient(90deg,#e0524d,#f2a73b,#15a35a,#5bb5e0,#9b5be0,#e0524d); background-size:200% auto; -webkit-background-clip:text; background-clip:text; color:transparent; animation:hue 3s linear infinite;}
+  @keyframes hue{to{background-position:-200% center;}}
+  .levelup.finale .newlv{font-size:54px;}
+  .levelup.finale .lu-msg{display:block; color:var(--brand-dark);}
   .langbox{background:var(--card); border-radius:24px; box-shadow:var(--shadow); padding:24px; max-width:340px; width:100%; text-align:center; animation:pop2 .35s cubic-bezier(.2,1.3,.4,1);}
   .langbox h2{margin:0 0 16px; font-size:20px; color:var(--brand-dark);}
   .lang-list{display:flex; flex-direction:column; gap:10px; margin-bottom:14px; max-height:55vh; overflow-y:auto;}
@@ -245,9 +252,10 @@
   <!-- ============ LEVEL UP ============ -->
   <div class="overlay" id="levelup-overlay">
     <div class="levelup" id="levelup-box">
-      <div class="spark">✨</div>
+      <div class="spark" id="lu-spark">✨</div>
       <h2 id="lu-title">Level Up!</h2>
       <div class="newlv">LV.<span id="lu-lv">2</span></div>
+      <p class="lu-msg" id="lu-msg"></p>
       <button class="btn btn-primary" id="lu-ok">OK</button>
     </div>
   </div>
@@ -269,7 +277,7 @@
 (function(){
   "use strict";
 
-  var EXP_PER_LEVEL=100, EXP_CORRECT=10, EXP_WRONG=7, READ_LOCK_MS=3000;
+  var EXP_PER_LEVEL=100, EXP_CORRECT=10, EXP_WRONG=7, READ_LOCK_MS=5000, MAX_LEVEL=99;
   var STORAGE_KEY="wiseworld.save.v1", LANG_KEY="wiseworld.lang.v1";
   var LABELS=["A","B","C","D"];
 
@@ -371,11 +379,12 @@
   function updateQuizPill(){ el("quiz-pill").textContent = "LV."+state.level+" · "+t("count", state.answered+1); }
   function renderHome(){
     el("home-lv").textContent=state.level;
-    el("home-exp").textContent=state.exp;
+    var atMax=state.level>=MAX_LEVEL;
+    el("home-exp").textContent=atMax?EXP_PER_LEVEL:state.exp;
     el("home-need").textContent=EXP_PER_LEVEL;
-    el("home-hint").textContent=t("toNext", EXP_PER_LEVEL-state.exp);
+    el("home-hint").textContent=atMax?t("maxReached"):t("toNext", EXP_PER_LEVEL-state.exp);
     updateQuizPill();
-    var pct=Math.max(0, Math.min(100,(state.exp/EXP_PER_LEVEL)*100));
+    var pct=atMax?100:Math.max(0, Math.min(100,(state.exp/EXP_PER_LEVEL)*100));
     requestAnimationFrame(function(){ el("home-bar").style.width=pct+"%"; });
   }
 
@@ -482,27 +491,46 @@
     clearInterval(expAnimTimer);
     expAnimTimer=setInterval(function(){
       i++; var p=Math.min(1,i/steps); var val=startExp+(target-startExp)*p;
-      var sl=state.level, se=val; while(se>=EXP_PER_LEVEL){ se-=EXP_PER_LEVEL; sl++; }
+      var sl=state.level, se=val; while(se>=EXP_PER_LEVEL && sl<MAX_LEVEL){ se-=EXP_PER_LEVEL; sl++; }
+      if(sl>=MAX_LEVEL){ sl=MAX_LEVEL; se=EXP_PER_LEVEL; }
       renderResultExp(sl, se);
       if(p<1) return;
       clearInterval(expAnimTimer);
-      var leveled=0; state.exp=target;
-      while(state.exp>=EXP_PER_LEVEL){ state.exp-=EXP_PER_LEVEL; state.level++; leveled++; }
+      var startLevel=state.level; state.exp=target;
+      while(state.exp>=EXP_PER_LEVEL && state.level<MAX_LEVEL){ state.exp-=EXP_PER_LEVEL; state.level++; }
+      if(state.level>=MAX_LEVEL){ state.level=MAX_LEVEL; state.exp=EXP_PER_LEVEL; }
       save(); renderResultExp(state.level, state.exp); updateQuizPill();
-      if(leveled>0){ WiseAudio && WiseAudio.sfx("levelup"); resolveAfterOverlay=done; showLevelUp(); }
+      if(state.level>startLevel){ celebrateLevelUp(state.level, done); }
       else { done && done(); }
     }, STEP);
   }
 
-  /* ---- level up ---- */
-  function showLevelUp(){
-    el("lu-lv").textContent=state.level;
-    var box=el("levelup-box");
+  /* ---- level up（通常=控えめ / 10の倍数=派手 / 99=ド派手フィナーレ）---- */
+  function celebrateLevelUp(level, done){
+    WiseAudio && WiseAudio.sfx("levelup");
+    if(level>=MAX_LEVEL){ showLevelUp("finale", level, done); return; }
+    if(level%10===0){ showLevelUp("milestone", level, done); return; }
+    // 通常レベル：オーバーレイを出さず、結果画面のリワード表示を一瞬「LV UP」にしてそのまま進む
+    var hint=el("reward-hint");
+    hint.textContent="🆙 LV."+level;
+    hint.classList.remove("pop"); void hint.offsetWidth; hint.classList.add("pop");
+    setTimeout(function(){ done && done(); }, 900);
+  }
+  function showLevelUp(type, level, done){
+    resolveAfterOverlay=done;
+    var box=el("levelup-box"), finale=(type==="finale");
+    box.classList.toggle("finale", finale);
+    el("lu-spark").textContent=finale?"🏆":"✨";
+    el("lu-title").textContent=finale?t("congrats"):t("levelUp");
+    el("lu-lv").textContent=level;
+    el("lu-msg").textContent=finale?t("maxReached"):"";
+    el("lu-ok").textContent=t("levelUpOk");
     box.querySelectorAll(".confetti").forEach(function(c){ c.remove(); });
-    var colors=["#f2a73b","#1f8a70","#e0524d","#5bb5e0","#f7c46a"];
-    for(var i=0;i<14;i++){ var c=document.createElement("span"); c.className="confetti";
+    var colors=finale?["#f2a73b","#1f8a70","#e0524d","#5bb5e0","#9b5be0","#f7c46a","#15a35a"]:["#f2a73b","#1f8a70","#e0524d","#5bb5e0","#f7c46a"];
+    var n=finale?42:18;
+    for(var i=0;i<n;i++){ var c=document.createElement("span"); c.className="confetti";
       c.style.left=(Math.random()*100)+"%"; c.style.background=colors[i%colors.length];
-      c.style.animationDuration=(1.6+Math.random()*1.4)+"s"; c.style.animationDelay=(Math.random()*0.5)+"s"; box.appendChild(c); }
+      c.style.animationDuration=(1.6+Math.random()*1.6)+"s"; c.style.animationDelay=(Math.random()*(finale?0.9:0.5))+"s"; box.appendChild(c); }
     el("levelup-overlay").classList.add("show");
   }
   function dismissLevelUp(){ el("levelup-overlay").classList.remove("show"); var r=resolveAfterOverlay; resolveAfterOverlay=null; r&&r(); }

@@ -48,6 +48,8 @@ window.WISE_WORLD_I18N = {
       earning:"EXP かくとく！",
       levelUp:"レベルアップ！",
       levelUpOk:"やった！",
+      congrats:"🎉 おめでとう！🎉",
+      maxReached:"さいこうレベル たっせい！ すごい！",
       chooseLang:"ことばを えらぶ",
       credit:"アプリ開発：介護と支援の相談どころ　そよぎ",
       reviewNote:null
@@ -70,6 +72,8 @@ window.WISE_WORLD_I18N = {
       earning:"Earning EXP!",
       levelUp:"Level Up!",
       levelUpOk:"Yay!",
+      congrats:"🎉 Congratulations! 🎉",
+      maxReached:"You reached the highest level!",
       chooseLang:"Choose language",
       credit:"Developed by Soyogi — Care & Support Consultation",
       reviewNote:"AI-assisted translation."
@@ -92,6 +96,8 @@ window.WISE_WORLD_I18N = {
       earning:"¡Ganando EXP!",
       levelUp:"¡Subiste de nivel!",
       levelUpOk:"¡Bien!",
+      congrats:"🎉 ¡Felicidades! 🎉",
+      maxReached:"¡Llegaste al nivel máximo!",
       chooseLang:"Elegir idioma",
       credit:"Desarrollado por Soyogi — Consultas de cuidado y apoyo",
       reviewNote:"Traducción asistida por IA."
@@ -114,6 +120,8 @@ window.WISE_WORLD_I18N = {
       earning:"Tu gagnes des EXP !",
       levelUp:"Niveau supérieur !",
       levelUpOk:"Super !",
+      congrats:"🎉 Félicitations ! 🎉",
+      maxReached:"Tu as atteint le niveau maximum !",
       chooseLang:"Choisir la langue",
       credit:"Développé par Soyogi — Consultations de soins et de soutien",
       reviewNote:"Traduction assistée par IA."
@@ -136,6 +144,8 @@ window.WISE_WORLD_I18N = {
       earning:"Ganhando EXP!",
       levelUp:"Subiu de nível!",
       levelUpOk:"Eba!",
+      congrats:"🎉 Parabéns! 🎉",
+      maxReached:"Você chegou ao nível máximo!",
       chooseLang:"Escolher idioma",
       credit:"Desenvolvido pela Soyogi — Consultoria de cuidado e apoio",
       reviewNote:"Tradução assistida por IA."
@@ -158,6 +168,8 @@ window.WISE_WORLD_I18N = {
       earning:"Mendapat EXP!",
       levelUp:"Naik level!",
       levelUpOk:"Hore!",
+      congrats:"🎉 Selamat! 🎉",
+      maxReached:"Kamu mencapai level tertinggi!",
       chooseLang:"Pilih bahasa",
       credit:"Dikembangkan oleh Soyogi — Konsultasi perawatan & dukungan",
       reviewNote:"Diterjemahkan dengan bantuan AI."
@@ -180,6 +192,8 @@ window.WISE_WORLD_I18N = {
       earning:"تكسب EXP!",
       levelUp:"ترقية المستوى!",
       levelUpOk:"رائع!",
+      congrats:"🎉 تهانينا! 🎉",
+      maxReached:"وصلت إلى أعلى مستوى!",
       chooseLang:"اختر اللغة",
       credit:"تطوير: سويوغي — استشارات الرعاية والدعم",
       reviewNote:"ترجمة بمساعدة الذكاء الاصطناعي."
@@ -202,6 +216,8 @@ window.WISE_WORLD_I18N = {
       earning:"获得 EXP！",
       levelUp:"升级了！",
       levelUpOk:"太好了！",
+      congrats:"🎉 恭喜！🎉",
+      maxReached:"你达到了最高等级！",
       chooseLang:"选择语言",
       credit:"开发：介护与支援咨询处 Soyogi",
       reviewNote:"AI 辅助翻译。"
@@ -224,6 +240,8 @@ window.WISE_WORLD_I18N = {
       earning:"Получаешь EXP!",
       levelUp:"Новый уровень!",
       levelUpOk:"Ура!",
+      congrats:"🎉 Поздравляем! 🎉",
+      maxReached:"Ты достиг максимального уровня!",
       chooseLang:"Выбрать язык",
       credit:"Разработано Soyogi — консультации по уходу и поддержке",
       reviewNote:"Перевод с помощью ИИ."
@@ -246,6 +264,8 @@ window.WISE_WORLD_I18N = {
       earning:"EXP मिल रहे हैं!",
       levelUp:"लेवल अप!",
       levelUpOk:"वाह!",
+      congrats:"🎉 बधाई हो! 🎉",
+      maxReached:"आपने सर्वोच्च स्तर पा लिया!",
       chooseLang:"भाषा चुनें",
       credit:"विकसित: देखभाल और सहायता परामर्श केंद्र Soyogi",
       reviewNote:"AI की मदद से किया गया अनुवाद।"
@@ -268,6 +288,8 @@ window.WISE_WORLD_I18N = {
       earning:"EXP পাচ্ছ!",
       levelUp:"লেভেল আপ!",
       levelUpOk:"দারুণ!",
+      congrats:"🎉 অভিনন্দন! 🎉",
+      maxReached:"তুমি সর্বোচ্চ লেভেলে পৌঁছেছ!",
       chooseLang:"ভাষা বেছে নাও",
       credit:"তৈরি: যত্ন ও সহায়তা পরামর্শকেন্দ্র Soyogi",
       reviewNote:"AI-এর সাহায্যে অনূদিত।"
@@ -290,6 +312,8 @@ window.WISE_WORLD_I18N = {
       earning:"Unapata EXP!",
       levelUp:"Umepanda ngazi!",
       levelUpOk:"Vizuri!",
+      congrats:"🎉 Hongera! 🎉",
+      maxReached:"Umefika ngazi ya juu zaidi!",
       chooseLang:"Chagua lugha",
       credit:"Imetengenezwa na Soyogi — ushauri wa malezi na msaada",
       reviewNote:"Imetafsiriwa kwa msaada wa AI."
