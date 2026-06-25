@@ -3,7 +3,7 @@
  * オフラインで完全に動くように、アプリ一式をキャッシュします。
  * 中身を更新したら CACHE の数字を上げてください（例 v1 -> v2）。
  */
-var CACHE = "wiseworld-v9";
+var CACHE = "wiseworld-v10";
 var ASSETS = [
   "./",
   "./index.html",
@@ -22,7 +22,13 @@ var ASSETS = [
   "./questions.sw.js",
   "./audio.js",
   "./manifest.webmanifest",
-  "./icons/icon.svg"
+  "./icons/icon.svg",
+  "./icons/icon-192.png",
+  "./icons/icon-512.png",
+  "./icons/maskable-512.png",
+  "./icons/apple-touch-icon.png",
+  "./icons/favicon-32.png",
+  "./icons/favicon-16.png"
 ];
 
 self.addEventListener("install", function(e){
