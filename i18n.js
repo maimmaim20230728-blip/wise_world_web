@@ -23,7 +23,10 @@ window.WISE_WORLD_I18N = {
     { code:"id", native:"Bahasa Indonesia", dir:"ltr" },
     { code:"ar", native:"العربية", dir:"rtl" },
     { code:"zh", native:"中文", dir:"ltr" },
-    { code:"ru", native:"Русский", dir:"ltr" }
+    { code:"ru", native:"Русский", dir:"ltr" },
+    { code:"hi", native:"हिन्दी", dir:"ltr" },
+    { code:"bn", native:"বাংলা", dir:"ltr" },
+    { code:"sw", native:"Kiswahili", dir:"ltr" }
   ],
 
   ui: {
@@ -69,7 +72,7 @@ window.WISE_WORLD_I18N = {
       levelUpOk:"Yay!",
       chooseLang:"Choose language",
       credit:"Developed by Soyogi — Care & Support Consultation",
-      reviewNote:"⚠ AI translation. Review by a native speaker / health expert is recommended."
+      reviewNote:"AI-assisted translation."
     },
     es: {
       langName:"Español",
@@ -91,7 +94,7 @@ window.WISE_WORLD_I18N = {
       levelUpOk:"¡Bien!",
       chooseLang:"Elegir idioma",
       credit:"Desarrollado por Soyogi — Consultas de cuidado y apoyo",
-      reviewNote:"⚠ Traducción por IA. Se recomienda la revisión de un hablante nativo o experto en salud."
+      reviewNote:"Traducción asistida por IA."
     },
     fr: {
       langName:"Français",
@@ -113,7 +116,7 @@ window.WISE_WORLD_I18N = {
       levelUpOk:"Super !",
       chooseLang:"Choisir la langue",
       credit:"Développé par Soyogi — Consultations de soins et de soutien",
-      reviewNote:"⚠ Traduction par IA. La révision par un locuteur natif ou un expert en santé est recommandée."
+      reviewNote:"Traduction assistée par IA."
     },
     pt: {
       langName:"Português",
@@ -135,7 +138,7 @@ window.WISE_WORLD_I18N = {
       levelUpOk:"Eba!",
       chooseLang:"Escolher idioma",
       credit:"Desenvolvido pela Soyogi — Consultoria de cuidado e apoio",
-      reviewNote:"⚠ Tradução por IA. Recomenda-se a revisão por um falante nativo ou especialista em saúde."
+      reviewNote:"Tradução assistida por IA."
     },
     id: {
       langName:"Bahasa Indonesia",
@@ -157,7 +160,7 @@ window.WISE_WORLD_I18N = {
       levelUpOk:"Hore!",
       chooseLang:"Pilih bahasa",
       credit:"Dikembangkan oleh Soyogi — Konsultasi perawatan & dukungan",
-      reviewNote:"⚠ Terjemahan AI. Disarankan ditinjau oleh penutur asli atau ahli kesehatan."
+      reviewNote:"Diterjemahkan dengan bantuan AI."
     },
     ar: {
       langName:"العربية",
@@ -179,7 +182,7 @@ window.WISE_WORLD_I18N = {
       levelUpOk:"رائع!",
       chooseLang:"اختر اللغة",
       credit:"تطوير: سويوغي — استشارات الرعاية والدعم",
-      reviewNote:"⚠ ترجمة آلية. يُنصح بمراجعتها من متحدث أصلي أو خبير صحي."
+      reviewNote:"ترجمة بمساعدة الذكاء الاصطناعي."
     },
     zh: {
       langName:"中文",
@@ -201,7 +204,7 @@ window.WISE_WORLD_I18N = {
       levelUpOk:"太好了！",
       chooseLang:"选择语言",
       credit:"开发：介护与支援咨询处 Soyogi",
-      reviewNote:"⚠ AI 翻译。建议由母语者或健康专家审核。"
+      reviewNote:"AI 辅助翻译。"
     },
     ru: {
       langName:"Русский",
@@ -223,7 +226,73 @@ window.WISE_WORLD_I18N = {
       levelUpOk:"Ура!",
       chooseLang:"Выбрать язык",
       credit:"Разработано Soyogi — консультации по уходу и поддержке",
-      reviewNote:"⚠ Перевод ИИ. Рекомендуется проверка носителем языка или специалистом по здоровью."
+      reviewNote:"Перевод с помощью ИИ."
+    },
+    hi: {
+      langName:"हिन्दी",
+      tagline:"स्वस्थ जीवन जीना सीखो ✨",
+      start:"▶ क्विज़ शुरू करें",
+      toNext:"अगले स्तर तक {n} EXP",
+      reset:"प्रगति रीसेट करें",
+      resetConfirm:"फिर से शुरू करें और अपना स्तर व EXP रीसेट करें?",
+      count:"प्र.{n}",
+      correct:"सही!",
+      wrong:"लगभग…",
+      rewardPending:"🌟 अंत तक पढ़ें और पाएँ +{n} EXP",
+      rewardEarned:"+{n} EXP मिले!",
+      nextLocked:"थोड़ा और… ({n})",
+      nextScroll:"अंत तक पढ़ें ↓",
+      nextReady:"अगला प्रश्न →",
+      earning:"EXP मिल रहे हैं!",
+      levelUp:"लेवल अप!",
+      levelUpOk:"वाह!",
+      chooseLang:"भाषा चुनें",
+      credit:"विकसित: देखभाल और सहायता परामर्श केंद्र Soyogi",
+      reviewNote:"AI की मदद से किया गया अनुवाद।"
+    },
+    bn: {
+      langName:"বাংলা",
+      tagline:"সুস্থ জীবনযাপন শেখো ✨",
+      start:"▶ কুইজ শুরু করো",
+      toNext:"পরের লেভেলে {n} EXP বাকি",
+      reset:"অগ্রগতি রিসেট করো",
+      resetConfirm:"আবার শুরু করে তোমার লেভেল ও EXP রিসেট করবে?",
+      count:"প্র.{n}",
+      correct:"সঠিক!",
+      wrong:"প্রায়…",
+      rewardPending:"🌟 শেষ পর্যন্ত পড়লে +{n} EXP",
+      rewardEarned:"+{n} EXP পেলে!",
+      nextLocked:"আরেকটু… ({n})",
+      nextScroll:"শেষ পর্যন্ত পড়ো ↓",
+      nextReady:"পরের প্রশ্ন →",
+      earning:"EXP পাচ্ছ!",
+      levelUp:"লেভেল আপ!",
+      levelUpOk:"দারুণ!",
+      chooseLang:"ভাষা বেছে নাও",
+      credit:"তৈরি: যত্ন ও সহায়তা পরামর্শকেন্দ্র Soyogi",
+      reviewNote:"AI-এর সাহায্যে অনূদিত।"
+    },
+    sw: {
+      langName:"Kiswahili",
+      tagline:"Jifunze kuishi kwa afya ✨",
+      start:"▶ Anza jaribio",
+      toNext:"EXP {n} hadi ngazi inayofuata",
+      reset:"Anzisha upya maendeleo",
+      resetConfirm:"Anza upya na kuondoa ngazi na EXP yako?",
+      count:"Swali {n}",
+      correct:"Sahihi!",
+      wrong:"Karibu…",
+      rewardPending:"🌟 Soma hadi mwisho upate +{n} EXP",
+      rewardEarned:"Umepata +{n} EXP!",
+      nextLocked:"Subiri kidogo… ({n})",
+      nextScroll:"Soma hadi mwisho ↓",
+      nextReady:"Swali linalofuata →",
+      earning:"Unapata EXP!",
+      levelUp:"Umepanda ngazi!",
+      levelUpOk:"Vizuri!",
+      chooseLang:"Chagua lugha",
+      credit:"Imetengenezwa na Soyogi — ushauri wa malezi na msaada",
+      reviewNote:"Imetafsiriwa kwa msaada wa AI."
     }
   }
 };
