@@ -1,4 +1,9 @@
 {
+  "accountAssociation": {
+    "header": "eyJmaWQiOjMzMzkzMTUsInR5cGUiOiJjdXN0b2R5Iiwia2V5IjoiMHg2RGYyOTIyRjc4OUVmMTFmNjk3NDREMEZkYWZCNDhmN2VhNjRmYTExIn0",
+    "payload": "eyJkb21haW4iOiJ3aXNlLXdvcmxkLXdlYi52ZXJjZWwuYXBwIn0",
+    "signature": "Usz7/9+4Qvk65nJJFBFDQDNbGlmIbR8vGUguOQamA4oSB99fYbLfJqKWGS3TieWfwLZRikTyP9uIsmOKsunlWhw="
+  },
   "miniapp": {
     "version": "1",
     "name": "Wise World",
