@@ -104,7 +104,7 @@
     background:linear-gradient(100deg,rgba(255,255,255,0),rgba(255,255,255,.5),rgba(255,255,255,0)); transform:skewX(-20deg); animation:shine 3.2s ease-in-out infinite;}
   @keyframes shine{0%{left:-60%;} 55%,100%{left:130%;}}
   .home-foot{position:relative; z-index:1; margin-top:6px;}
-  .linkbtn{background:none; border:none; color:var(--ink-soft); font-size:12.5px; text-decoration:underline; cursor:pointer; font-family:inherit;}
+  .linkbtn{background:none; border:none; color:var(--ink-soft); font-size:12.5px; text-decoration:underline; cursor:pointer; font-family:inherit; padding:14px 16px; min-height:44px; min-width:44px;}
   .review-note{display:none; font-size:11px; color:var(--ink-soft); text-align:center; max-width:340px; margin:9px auto 0; line-height:1.45; opacity:.85;}
   .credit{display:block; margin-top:10px; font-size:11.5px; color:var(--brand-dark); text-decoration:underline; opacity:.9; text-align:center;}
   .credit:active{opacity:.6;}
@@ -234,7 +234,7 @@
   .guide-row-in{display:flex; gap:10px; max-width:540px; margin:0 auto;}
   .guide-row .btn{flex:1 1 0; min-width:0; min-height:60px; padding:12px 10px; overflow-wrap:anywhere;}
   .guide-prev{background:var(--card); color:var(--brand-dark); border:2px solid var(--brand);}
-  .guide-link{display:block; margin:0 auto 4px;}
+  .guide-link{display:block; margin:0 auto 4px; font-size:14px;}
 
   /* ============ ふりがな（日本語の総ルビ）============ */
   ruby{ruby-position:over; ruby-align:center;}
@@ -487,6 +487,7 @@
     var note=(I18N.ui[lang]||{}).reviewNote, nEl=el("review-note");
     if(note){ nEl.textContent=note; nEl.style.display="block"; } else { nEl.style.display="none"; }
     el("guide-btn").textContent=gtx("again");
+    [["lang-btn","langLabel"],["mute-btn","soundLabel"],["cats-home","homeLabel"],["quiz-home","homeLabel"]].forEach(function(p){ var b=el(p[0]), v=t(p[1]); b.setAttribute("aria-label",v); b.title=v; });
     var gd=document.querySelector(".guide-ov");
     if(gd && gd._draw) gd._draw();   // はじめての あそびかた も いまの ページのまま訳し直す
   }
@@ -931,7 +932,7 @@
     if(!ap) return;
     try{ ap.addListener("backButton", function(){ onBack(); }); }catch(e){}
   }
-  function refreshMuteIcon(){ el("mute-btn").textContent=WiseAudio && WiseAudio.isMuted() ? "🔇" : "🔊"; }
+  function refreshMuteIcon(){ var mu=!!(WiseAudio && WiseAudio.isMuted()); el("mute-btn").textContent=mu ? "🔇" : "🔊"; el("mute-btn").setAttribute("aria-pressed", mu ? "true" : "false"); }
 
   function buildBubbles(){
     var emojis=["💧","🧼","🍎","📚","🚿","🪥","☀️","🌱","✋","🍼"], box=el("bubbles");
