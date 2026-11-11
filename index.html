@@ -932,7 +932,7 @@
     if(!ap) return;
     try{ ap.addListener("backButton", function(){ onBack(); }); }catch(e){}
   }
-  function refreshMuteIcon(){ var mu=!!(WiseAudio && WiseAudio.isMuted()); el("mute-btn").textContent=mu ? "🔇" : "🔊"; el("mute-btn").setAttribute("aria-pressed", mu ? "true" : "false"); }
+  function refreshMuteIcon(){ var mu=!!(WiseAudio && WiseAudio.isMuted()); el("mute-btn").textContent=mu ? "🔇" : "🔊"; el("mute-btn").setAttribute("aria-pressed", mu ? "false" : "true"); }
 
   function buildBubbles(){
     var emojis=["💧","🧼","🍎","📚","🚿","🪥","☀️","🌱","✋","🍼"], box=el("bubbles");
